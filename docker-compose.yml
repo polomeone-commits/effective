@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend              # Собираем
+    container_name: effective_backend
+    restart: unless-stopped
+    # Порты НАРУЖУ не выставляем
+    networks:
+      - effective_net
+
+  # Nginx
+  nginx:
+    image: nginx:1.27-alpine       # Берем готовую легкую версию
+    container_name: effective_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"                    # 80 порт в мир
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro # Наш конфиг
+    depends_on:
+      - backend                    # Ждем, пока сначала поднимется Питон
+    networks:
+      - effective_net
+
+# Описываем
+networks:
+  effective_net:
+    driver: bridge
