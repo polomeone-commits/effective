@@ -18,7 +18,7 @@ Client -> Nginx (80) -> Python (8080)
 Запуск:
 
 ```
-git clone https://git.iiba.pw/h2nexuspl/effective.git
+git clone https://github.com/polomeone-commits/effective.git
 cd effective
 ```
 
